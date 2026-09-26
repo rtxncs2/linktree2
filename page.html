@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jac Sparrow</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: 'rgb(45, 212, 191)',
+              500: 'rgb(20, 184, 166)',
+              600: 'rgb(13, 148, 136)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Background subtle grid pattern */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+
+    /* Glow backdrop utilities */
+    .card-glow {
+      box-shadow: 
+        0 15px 35px -10px rgba(0, 0, 0, 0.7),
+        0 0 30px -15px rgba(20, 184, 166, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .card-glow:hover {
+      box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.8),
+        0 0 45px -8px rgba(45, 212, 191, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+
+<body class="bg-[#07090e] text-slate-200 font-sans antialiased selection:bg-teal-500 selection:text-black relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <!-- Ambient lighting effects -->
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-teal-500/[0.08] rounded-full blur-[170px] pointer-events-none z-0"></div>
+  <div class="fixed top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[450px] bg-cyan-500/[0.06] rounded-full blur-[160px] pointer-events-none z-0"></div>
+
+  <!-- Top Main Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#07090e]/85 border-b border-white/5" id="navbar">
+    <div class="w-full px-6 sm:px-10 h-16 flex items-center justify-between">
+      
+      <!-- Brand pinned to far left -->
+      <a href="javascript:void(0)" class="flex items-center gap-2 group">
+        <span class="font-mono text-base font-bold tracking-tight text-white group-hover:text-teal-400 transition-colors">
+          jac.sparrow<span class="text-teal-400">()</span>
+        </span>
+      </a>
+
+      <!-- Navigation links pinned to far right -->
+      <nav class="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-medium text-slate-300 font-mono">
+        <a href="https://aurora-zeta-one.vercel.app" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors tracking-wide">
+           
+        </a>
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors tracking-wide">
+          home
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-10 lg:px-14 pt-24 pb-12 w-full max-w-7xl mx-auto my-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center w-full">
+      
+      <!-- Left Column: Title -->
+      <div class="lg:col-span-5 text-left flex flex-col justify-center">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight select-none">
+          Crafting Clean<br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-teal-300 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            Web Projects
+          </span>
+        </h1>
+      </div>
+
+      <!-- Right Column: Three clean Linktree-style clickable rows -->
+      <div class="lg:col-span-7 w-full flex flex-col gap-4 sm:gap-5">
+        
+        <!-- Row 1: Whiteboard -->
+        <a href="https://rtxncs2.github.io/cf" 
+           class="group relative w-full flex items-center justify-between p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0d1117]/85 backdrop-blur-xl card-glow transition-all duration-300 hover:scale-[1.015] hover:border-teal-400/50 hover:bg-[#111722]/90">
+          
+          <div class="flex items-center gap-4 sm:gap-5 min-w-0">
+            <!-- Globe Icon Frame -->
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center bg-teal-500/10 border border-teal-500/20 text-teal-400 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 group-hover:text-teal-300 transition-all shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+
+            <!-- Content Details -->
+            <div class="flex flex-col min-w-0">
+              <span class="text-base sm:text-lg font-semibold text-white group-hover:text-teal-300 transition-colors">
+                Whiteboard
+              </span>
+              <p class="text-xs sm:text-sm text-slate-400 font-sans mt-0.5 truncate">
+                Draw anthing on a white screen
+              </p>
+            </div>
+          </div>
+
+          <!-- Arrow Indicator -->
+          <div class="ml-3 sm:ml-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-teal-400/40 group-hover:bg-teal-500/10 text-slate-400 group-hover:text-teal-300 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Row 2: Music Player -->
+        <a href="https://aurora-zeta-one.vercel.app"
+           class="group relative w-full flex items-center justify-between p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0d1117]/85 backdrop-blur-xl card-glow transition-all duration-300 hover:scale-[1.015] hover:border-teal-400/50 hover:bg-[#111722]/90">
+          
+          <div class="flex items-center gap-4 sm:gap-5 min-w-0">
+            <!-- Globe Icon Frame -->
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center bg-teal-500/10 border border-teal-500/20 text-teal-400 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 group-hover:text-teal-300 transition-all shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+
+            <!-- Content Details -->
+            <div class="flex flex-col min-w-0">
+              <span class="text-base sm:text-lg font-semibold text-white group-hover:text-teal-300 transition-colors">
+                Music Player
+              </span>
+              <p class="text-xs sm:text-sm text-slate-400 font-sans mt-0.5 truncate">
+                A collection of some good audio tracks
+              </p>
+            </div>
+          </div>
+
+          <!-- Arrow Indicator -->
+          <div class="ml-3 sm:ml-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-teal-400/40 group-hover:bg-teal-500/10 text-slate-400 group-hover:text-teal-300 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Row 3: Malayalam Stories Hub -->
+        <a href="https://rtxncs2.github.io/malayalam-stories/" target="_blank" rel="noopener noreferrer" 
+           class="group relative w-full flex items-center justify-between p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0d1117]/85 backdrop-blur-xl card-glow transition-all duration-300 hover:scale-[1.015] hover:border-teal-400/50 hover:bg-[#111722]/90">
+          
+          <div class="flex items-center gap-4 sm:gap-5 min-w-0">
+            <!-- Globe Icon Frame -->
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center bg-teal-500/10 border border-teal-500/20 text-teal-400 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 group-hover:text-teal-300 transition-all shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+
+            <!-- Content Details -->
+            <div class="flex flex-col min-w-0">
+              <span class="text-base sm:text-lg font-semibold text-white group-hover:text-teal-300 transition-colors">
+                Malayalam Stories Hub
+              </span>
+              <p class="text-xs sm:text-sm text-slate-400 font-sans mt-0.5 truncate">
+                A collection of malayalam stories
+              </p>
+            </div>
+          </div>
+
+          <!-- Arrow Indicator -->
+          <div class="ml-3 sm:ml-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-teal-400/40 group-hover:bg-teal-500/10 text-slate-400 group-hover:text-teal-300 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="relative z-10 w-full py-6 border-t border-white/5 text-center text-xs font-mono text-slate-500">
+    <p></p>
+  </footer>
+
+</body>
+</html>
