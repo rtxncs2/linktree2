@@ -3,248 +3,272 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jac Sparrow · linktree</title>
-  <!-- Font Awesome 6 (free) for subtle icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Jac Sparrow</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: 'rgb(45, 212, 191)',
+              500: 'rgb(20, 184, 166)',
+              600: 'rgb(13, 148, 136)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* ---------- RESET & BASE ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Subtle background grid pattern */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(145deg, #f7f0eb 0%, #e8dfd7 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
+    /* Terminal blinking cursor */
+    @keyframes cursor-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .blinking-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.15em;
+      vertical-align: -0.18em;
+      background-color: rgb(45, 212, 191);
+      animation: cursor-blink 1s infinite;
     }
 
-    /* subtle grain texture (optional) – gives warmth */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* main card – everything sits inside this glassy container */
-    .linktree {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 3.5rem;
-      padding: 2.8rem 2rem 2.5rem;
-      max-width: 680px;
-      width: 100%;
+    /* Glow backdrop utility */
+    .terminal-shadow {
       box-shadow: 
-        0 30px 50px -20px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
-        0 0 0 1px rgba(210, 190, 170, 0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 10;
+        0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 45px -10px rgba(20, 184, 166, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
-
-    /* ---------- AVATAR ---------- */
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #ffffff;
-      box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(200, 170, 140, 0.3);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      margin-bottom: 1.3rem;
-    }
-
-    .avatar:hover {
-      transform: scale(1.02);
-      box-shadow: 0 25px 35px -10px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(210, 170, 120, 0.6);
-    }
-
-    /* ---------- NAME ---------- */
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #2c241e;
-      margin-bottom: 0.3rem;
-      text-align: center;
-      line-height: 1.2;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-    }
-
-    /* small decorative line */
-    .divider {
-      width: 70px;
-      height: 3px;
-      background: linear-gradient(90deg, #d9b99b, #b28b6e, #d9b99b);
-      border-radius: 10px;
-      margin: 1.2rem 0 1.8rem;
-      opacity: 0.7;
-    }
-
-    /* ---------- LINKS CONTAINER ---------- */
-    .links-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    /* ---------- LINK BUTTONS ---------- */
-    .link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1.1rem 1.6rem;
-      background: #fefcf9;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      color: #3a2e25;
-      box-shadow: 0 10px 18px -10px rgba(70, 50, 35, 0.15), 0 0 0 1px rgba(220, 200, 180, 0.5);
-      transition: all 0.2s ease;
-      letter-spacing: 0.01em;
-      text-align: center;
-      word-break: break-word;
-      line-height: 1.3;
-      position: relative;
-      backdrop-filter: blur(4px);
-    }
-
-    /* left accent on hover */
-    .link::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 20%;
-      height: 60%;
-      width: 4px;
-      background: #c7a17a;
-      border-radius: 4px;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .link:hover {
-      background: #ffffff;
-      box-shadow: 0 18px 25px -12px rgba(80, 55, 35, 0.25), 0 0 0 2px #dbbc9b;
-      transform: translateY(-3px);
-      color: #1f1812;
-    }
-
-    .link:hover::before {
-      opacity: 1;
-    }
-
-    /* subtle icon placeholder (using pseudo-element? we'll use emoji or leave clean) */
-    /* But we want icons? – we can add small fontawesome icons via CSS classes, but I'll keep it minimal */
-    /* Yet some links could have distinct labels, no icons needed – clean */
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      margin-top: 2.8rem;
-      font-size: 0.9rem;
-      color: #9b887a;
-      text-align: center;
-      letter-spacing: 0.3px;
-      border-top: 1px solid rgba(180, 150, 130, 0.25);
-      padding-top: 1.8rem;
-      width: 100%;
-      font-weight: 400;
-      transition: color 0.2s;
-    }
-
-    footer:hover {
-      color: #7a6658;
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 480px) {
-      .linktree {
-        padding: 2rem 1.2rem 1.8rem;
-        border-radius: 2.5rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .avatar {
-        width: 100px;
-        height: 100px;
-      }
-
-      .link {
-        padding: 1rem 1.2rem;
-        font-size: 1rem;
-        gap: 0.5rem;
-      }
-
-      footer {
-        margin-top: 2rem;
-        font-size: 0.8rem;
-      }
-    }
-
-    /* Fine tune spacing between avatar and name, but original had <br> – we removed */
   </style>
 </head>
-<body>
-  <div class="linktree">
-    <!-- avatar from provided URL (exact source) -->
-    <img 
-      alt="Jac Sparrow" 
-      class="avatar" 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTL5pBqqXVjNiers6Z-SJevvoVKMbfWCc4ujdu5WFsdSM7GSiFcfWsXg79P3edOL-Yia9QJmgKkX9sVcaU3wxa8mW3kk6ijUXr0YID9w8YBkmtqSDsnXPA7EWE7IZ3c4tbPZmsrUMg2BEMbcYCmS1w1n-eLLF45f3fYKBbspn7kh2OroYzV_30fMq5q8W7/s720/43710.jpg"
-    />
 
-    <h1>Jac Sparrow</h1>
-    <div class="divider" aria-hidden="true"></div>
+<body class="bg-[#07090e] text-slate-200 font-sans antialiased selection:bg-teal-500 selection:text-black relative min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-    <!-- link list – exactly as provided, cleaned and reordered naturally -->
-    <div class="links-container">
+  <!-- Ambient lighting effects -->
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+  <div class="fixed top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-teal-500/[0.08] rounded-full blur-[170px] pointer-events-none z-0"></div>
+  <div class="fixed top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[450px] bg-cyan-500/[0.06] rounded-full blur-[160px] pointer-events-none z-0"></div>
 
+  <!-- Top Main Navigation Bar (Full Width: Left-aligned brand, Right-aligned links) -->
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#07090e]/85 border-b border-white/5" id="navbar">
+    <div class="w-full px-6 sm:px-10 h-16 flex items-center justify-between">
       
-     
-
-      
-
-    
-
-
-      <a class="link" href="https://t.me/pvthdvtw" target="_blank" rel="noopener noreferrer">
-        linux apps
+      <!-- Brand pinned to far left -->
+      <a href="javascript:void(0)" class="flex items-center gap-2 group">
+        <span class="font-mono text-base font-bold tracking-tight text-white group-hover:text-teal-400 transition-colors">
+          jac.sparrow<span class="text-teal-400">()</span>
+        </span>
       </a>
 
-      <a class="link" href="https://t.me/rhrkfbfksnw" target="_blank" rel="noopener noreferrer">
-        android apps
-      </a>
+      <!-- Navigation links pinned to far right -->
+      <nav class="flex items-center gap-6 sm:gap-10 text-xs sm:text-sm font-medium text-slate-300 font-mono">
+       
 
-      <a class="link" href="https://aurora-zeta-one.vercel.app" target="_blank" rel="noopener noreferrer">
-        my fav songs
-      </a>
+       
+       
+       
+       
+       
+        <a href="https://t.me/pvthdvtw" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors tracking-wide">
+          linux
+        </a>
+        <a href="https://t.me/rhrkfbfksnw" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors tracking-wide">
+          android
+        </a>
+        <a href="https://aurora-zeta-one.vercel.app" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors tracking-wide">
+          web
+        </a>
+      </nav>
+
     </div>
+  </header>
 
-    <footer>
-      © 2026 sparrow.blogs
-    </footer>
-  </div>
+  <!-- Main Hero: Two-column row on md/lg screens -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-10 lg:px-14 pt-24 pb-12 w-full max-w-7xl mx-auto my-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
+      
+      <!-- Left Column: Title Greeting & Subtext -->
+      <div class="lg:col-span-5 text-left flex flex-col justify-center">
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight mb-4 select-none">
+          Hi, I'm <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-teal-300 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+            Jac Sparrow
+          </span>
+        </h1>
+
+        <p class="text-slate-400 text-sm sm:text-base font-normal leading-relaxed max-w-md">
+          I create and deploy android apps, websites and linux applications. 
+        </p>
+      </div>
+
+      <!-- Right Column: Interactive Animated Bash Shell Box -->
+      <div class="lg:col-span-7 w-full">
+        <div class="w-full text-left font-mono rounded-xl overflow-hidden border border-white/10 bg-[#0d1117]/90 backdrop-blur-xl terminal-shadow transition-all duration-300 hover:border-teal-500/30">
+          
+          <!-- Window Title Bar -->
+          <div class="px-4 py-3 bg-[#161b22]/90 border-b border-white/5 flex items-center justify-between select-none">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block shadow-sm"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block shadow-sm"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block shadow-sm"></span>
+            </div>
+            <div class="text-xs text-slate-400 tracking-wide font-medium flex items-center gap-2">
+              <span class="text-slate-500">bash</span>
+              <span>—</span>
+              <span>jac@sparrow-box:~</span>
+            </div>
+            <div class="w-12"></div> <!-- Spacer for symmetry -->
+          </div>
+
+          <!-- Terminal Body Content -->
+          <div class="p-5 sm:p-6 text-xs sm:text-sm leading-relaxed space-y-4 text-slate-300 select-text">
+            
+            <!-- Command 1: whoami -->
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 text-teal-400 font-semibold">
+                <span>jac@sparrow:~$</span>
+                <span class="text-white font-normal">whoami</span>
+              </div>
+              <div class="mt-1 text-slate-300 font-medium pl-2 sm:pl-3 border-l-2 border-teal-500/30">
+                Jac Sparrow // Web & App Developer
+              </div>
+            </div>
+
+            <!-- Command 2: cat focus_areas.json -->
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 text-teal-400 font-semibold">
+                <span>jac@sparrow:~$</span>
+                <span class="text-white font-normal">cat focus_areas.json</span>
+              </div>
+              <div class="mt-1.5 text-emerald-400/90 pl-2 sm:pl-3 border-l-2 border-emerald-500/30 break-words">
+                <span class="text-slate-400">[</span>
+                <span class="text-amber-300">"Linux Applications"</span><span class="text-slate-400">,</span>
+                <span class="text-amber-300">"Android Apps"</span><span class="text-slate-400">,</span>
+                <span class="text-amber-300">"Modern Web Platforms"</span><span class="text-slate-400">,</span>
+                <span class="text-amber-300">"Custom Designs"</span>
+                <span class="text-slate-400">]</span>
+              </div>
+            </div>
+
+            <!-- Command 3: Live Typewriter Animated Command Loop -->
+            <div class="pt-1">
+              <div class="flex flex-wrap items-center gap-1.5 text-teal-400 font-semibold">
+                <span>jac@sparrow:~$</span>
+                <span class="text-white font-normal tracking-wide" id="typing-command"></span><span class="blinking-cursor"></span>
+              </div>
+              <!-- Output line that reveals after typing completes -->
+              <div id="command-output" class="mt-1.5 text-slate-400 font-mono text-xs sm:text-[13px] pl-2 sm:pl-3 border-l-2 border-cyan-500/30 min-h-[1.5rem] transition-opacity duration-200 opacity-0"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Interactive Terminal Typewriter Script -->
+  <script>
+    (function initTerminalTypewriter() {
+      const commandEl = document.getElementById('typing-command');
+      const outputEl = document.getElementById('command-output');
+
+      const sequence = [
+        {
+          cmd: "fastboot devices -l",
+          out: "device:8a93e412  fastboot  product:blueline  tar:release-keys"
+        },
+        {
+          cmd: "uname -srmo",
+          out: "Linux 6.9.12-arch1-1 x86_64 GNU/Linux"
+        },
+        {
+          cmd: "cargo run --release",
+          out: "   Compiling app v1.0.0 (release)\n    Finished [optimized] in 0.84s\n[✓] Server listening on :8080"
+        },
+        {
+          cmd: "adb shell getprop ro.build.version.release",
+          out: "15 // VanillaIceCream"
+        }
+      ];
+
+      let seqIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typeSpeed = 55;
+      const backspaceSpeed = 25;
+      const pauseDuration = 2200;
+
+      function tick() {
+        const currentItem = sequence[seqIndex];
+        const fullCmd = currentItem.cmd;
+
+        if (!isDeleting) {
+          charIndex++;
+          commandEl.textContent = fullCmd.substring(0, charIndex);
+
+          if (charIndex === fullCmd.length) {
+            // Command finished typing -> reveal output
+            outputEl.textContent = currentItem.out;
+            outputEl.classList.remove('opacity-0');
+            outputEl.classList.add('opacity-100');
+
+            setTimeout(() => {
+              isDeleting = true;
+              tick();
+            }, pauseDuration);
+            return;
+          }
+          setTimeout(tick, typeSpeed);
+        } else {
+          // Hide output immediately when erasing starts
+          if (charIndex === fullCmd.length) {
+            outputEl.classList.remove('opacity-100');
+            outputEl.classList.add('opacity-0');
+          }
+
+          charIndex--;
+          commandEl.textContent = fullCmd.substring(0, charIndex);
+
+          if (charIndex === 0) {
+            isDeleting = false;
+            seqIndex = (seqIndex + 1) % sequence.length;
+            outputEl.textContent = '';
+            setTimeout(tick, 400);
+            return;
+          }
+          setTimeout(tick, backspaceSpeed);
+        }
+      }
+
+      // Initial start delay
+      setTimeout(tick, 600);
+    })();
+  </script>
+
 </body>
 </html>
